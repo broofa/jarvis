@@ -1,2 +1,56 @@
-h1= title
-p Welcome to #{title}
+style
+  fieldset {
+    margin-top: 10px;
+    border: solid 1px #ccc;
+    border-width: 1px 0px 0px 0px;
+  }
+
+  body {
+    font-family: Forum, serif;
+    font-size: 12pt;
+  }
+
+  h2 {
+    font-family: "Merienda One", cursive;
+  }
+
+
+  input[type="radio"], input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  #engines label {
+    margin-right: 20px;
+  }
+
+  #modules label {
+    display: block;
+    margin: 10px;
+  }
+
+div(style="text-align: center")
+  img(src='/images/jarvis.png')
+  h2 The Search Box Assistant
+
+script
+  function installIt() {
+    external.AddSearchProvider('http://localhost:3000/jarvis.xml');
+  }
+
+a(href='#',onclick='installIt()') install now!
+
+fieldset#engines
+  legend Select your preferred search engine?
+  each v,k in search.ENGINES
+    label
+      input(type='radio', name='engine', value=k, checked=(k == search.engine))
+      | #{v.name}
+
+fieldset#modules
+  legend Command modules
+  label
+    input(type='checkbox')
+    | Jarvis
+  label
+    input(type='checkbox')
+    | Jarvis

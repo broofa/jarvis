@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!-- See https://developer.mozilla.org/en/creating_opensearch_plugins_for_firefox -->
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">  
+  <ShortName>Jarvis</ShortName>
+  <Description>Jarvis. The Search Box Assistant.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" method="GET" template="http://localhost:3000/search">
+    <Param name="q" value="{searchTerms}"/>
+  </Url>
+  <SearchForm>http://www.bing.com/search</SearchForm>
+</OpenSearchDescription>  

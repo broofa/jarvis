@@ -2,12 +2,21 @@
  * Module dependencies.
  */
 
-var express = require('express'),
+var express = require('express');
+
+var command = require('./command'),
     search = require('./search');
 
 var app = module.exports = express.createServer();
 
 // Configuration
+
+function userParser(req, res, next) {
+  req.user = {
+    engine: req.cookies.engine || 'google'
+  };
+  next();
+}
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
@@ -15,6 +24,7 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
+  app.use(userParser);
   app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
@@ -32,14 +42,16 @@ app.configure('production', function() {
 
 app.get('/', function(req, res) {
   res.render('index', {
+    user: req.user,
+    commands: command.list,
     search: search,
     title: 'Jarvis'
   });
 });
 
 app.get('/search', function(req, res) {
-  var engine = req.cookies.engine || 'google';
-  res.redirect(search.getQueryURL(engine, req.query.q));
+  var url = command.process(req) || '/error';
+  res.redirect(url || '/');
 });
 
 app.listen(3000);

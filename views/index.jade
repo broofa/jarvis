@@ -1,3 +1,5 @@
+//- TODO: These styles should move into a stylesheet at some point, but I
+  prefer to keep styles that are specific to a page inline during development
 style
   fieldset {
     margin-top: 10px;
@@ -5,52 +7,104 @@ style
     border-width: 1px 0px 0px 0px;
   }
 
-  body {
-    font-family: Forum, serif;
-    font-size: 12pt;
-  }
-
-  h2 {
-    font-family: "Merienda One", cursive;
-  }
-
-
   input[type="radio"], input[type="checkbox"] {
     margin-right: 10px;
   }
 
-  #engines label {
-    margin-right: 20px;
+  dt {
+    font-weight: bold;
+    color: #444;
+  }
+  dd {
+    margin-bottom: 1em;
   }
 
-  #modules label {
+  #modules {
+    list-style-type: none;
+  }
+
+  #modules b {
+    display: inline-block;
+    min-width: 60px;
+    font-family: monospace;
+  }
+
+  #modules button {
+    display: none;
+    list-style-type: none;
+  }
+  #modules li {
+  min-height: 24px;
+  }
+  #modules li:hover button {
+    display: inline;
+  }
+
+  #getit {
+    position:absolute; top: 0px; right: 0px;
+    width: 160px;
+    height: 120px;
+    overflow:hidden;
+  }
+  #getit a {
+    position:absolute; top: 0px; right: 0px;
+    width: 300px;
     display: block;
-    margin: 10px;
-  }
+    text-align: center;
+    padding: 3px 0px;
+    border: solid 2px #666;
+    font: 11.5pt "Merienda One", cursive;
+    text-decoration: none;
 
-div(style="text-align: center")
-  img(src='/images/jarvis.png')
-  h2 The Search Box Assistant
+    box-shadow: 4px 4px 4px rgba(0,0,0,.5);
+
+    -moz-transform: translate(90px,25px) rotate(35deg);
+    -webkit-transform: translate(90px,25px) rotate(35deg);
+    -o-transform: translate(90px,25px) rotate(35deg);
+    -ms-transform: translate(90px,25px) rotate(35deg);
+    transform: translate(90px,25px) rotate(35deg);
+  }
 
 script
-  function installIt() {
+  function addJarvis() {
     external.AddSearchProvider('http://localhost:3000/jarvis.xml');
   }
 
-a(href='#',onclick='installIt()') install now!
+  function setDefault(cmd) {
+    document.cookie=[
+      'd=' + cmd,
+      'path=/',
+      'max-age=' + 1e8
+    ].join(';')
+  }
 
-fieldset#engines
-  legend Select your preferred search engine?
-  each v,k in search.ENGINES
-    label
-      input(type='radio', name='engine', value=k, checked=(k == search.engine))
-      | #{v.name}
+//- "Get the Source"
+div#getit
+  a(href='https://github.com/broofa/jarvis') Get The Source
 
-fieldset#modules
-  legend Command modules
-  label
-    input(type='checkbox')
-    | Jarvis
-  label
-    input(type='checkbox')
-    | Jarvis
+dl
+  dt What is it?
+  dd Jarvis lets you add custom commands to your browser's search box, and share those commands with the rest of your organization. Jarvis is all about letting you jump right to the information you care about, whether it's in your customer database, issue tracking system, source code repository, corporate wiki, inventory system, or simply a collection of bookmarks everyone in the company uses.
+
+  dt How's it work?
+  dd It's so darn simple it's almost embarassing.  Just 
+    a(href='#',onclick='addJarvis()') add Jarvis to your search box
+    |  and search for "jarvis" to get started. (PENDING: that link only works on IE and FF for the moment.  Safari/Chrome support coming soon.)
+
+  dt "Wait... you're not one of those spammy toolbar things are you?"
+  dd Nope.  Jarvis is 100% kosher.  No spam, no malware/adware, nothing to install &hellip; none of that nonsense.  Heck, it's opensource - you can hack on the code if you want!
+
+h2 Commands
+
+p Jarvis ships with the following commands
+
+ul#modules
+  li(style='color: #666; font-size: 85%') &nbsp;&nbsp;&darr; default command (*)
+  each v,k in commands
+    li
+      label
+        input(type='radio', name='command', checked=true, onclick='setDefault(\'' + v.phrase + '\')')
+        | !{v.doc}
+      button() set as default
+
+  p (*) The default command is used anytime your search isn't recognized by Jarvis.  It's generally a good idea to have set this to a search engine, like "go" for google.

@@ -4,5 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='http://fonts.googleapis.com/css?family=Forum|Merienda+One', rel='stylesheet', type='text/css')
+    link(rel='search', href='http://localhost:3000/jarvis.xml', type='application/opensearchdescription+xml', title='Jarvis')
 
-  body!= body
+  body
+    div#top
+      img(src='/images/jarvis.png')
+      h2 The Search Box Assistant
+
+    div!= body

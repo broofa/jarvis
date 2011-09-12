@@ -1,7 +1,16 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 30px;
+  font: 12pt Forum,serif;
+}
+#top {
+  text-align: center;
+}
+#top h2 {
+  font: 11.5pt "Merienda One", cursive;
 }
 a {
-  color: #00B7FF;
+  color: #803;
+}
+a:hover {
+  color: #f00;
 }

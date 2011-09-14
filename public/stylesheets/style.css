@@ -1,8 +1,10 @@
 body {
-  padding: 30px;
+  padding: 0px;
+  margin: 0px;
   font: 12pt Forum,serif;
 }
 #top {
+  position: relative;
   text-align: center;
 }
 #top h2 {
@@ -12,5 +14,5 @@ a {
   color: #803;
 }
 a:hover {
-  color: #f00;
+  color: #a00;
 }

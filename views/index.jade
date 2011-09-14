@@ -1,5 +1,6 @@
-//- TODO: These styles should move into a stylesheet at some point, but I
-  prefer to keep styles that are specific to a page inline during development
+//- TODO: These styles should move into a stylesheet at some point, but
+  having them inline here is easier during early development
+
 style
   fieldset {
     margin-top: 10px;
@@ -19,50 +20,14 @@ style
     margin-bottom: 1em;
   }
 
-  #modules {
+  .module li {
     list-style-type: none;
   }
 
-  #modules b {
+  .module b {
     display: inline-block;
     min-width: 60px;
     font-family: monospace;
-  }
-
-  #modules button {
-    display: none;
-    list-style-type: none;
-  }
-  #modules li {
-  min-height: 24px;
-  }
-  #modules li:hover button {
-    display: inline;
-  }
-
-  #getit {
-    position:absolute; top: 0px; right: 0px;
-    width: 160px;
-    height: 120px;
-    overflow:hidden;
-  }
-  #getit a {
-    position:absolute; top: 0px; right: 0px;
-    width: 300px;
-    display: block;
-    text-align: center;
-    padding: 3px 0px;
-    border: solid 2px #666;
-    font: 11.5pt "Merienda One", cursive;
-    text-decoration: none;
-
-    box-shadow: 4px 4px 4px rgba(0,0,0,.5);
-
-    -moz-transform: translate(90px,25px) rotate(35deg);
-    -webkit-transform: translate(90px,25px) rotate(35deg);
-    -o-transform: translate(90px,25px) rotate(35deg);
-    -ms-transform: translate(90px,25px) rotate(35deg);
-    transform: translate(90px,25px) rotate(35deg);
   }
 
 script
@@ -78,33 +43,40 @@ script
     ].join(';')
   }
 
-//- "Get the Source"
-div#getit
-  a(href='https://github.com/broofa/jarvis') Get The Source
-
 dl
   dt What is it?
-  dd Jarvis lets you add custom commands to your browser's search box, and share those commands with the rest of your organization. Jarvis is all about letting you jump right to the information you care about, whether it's in your customer database, issue tracking system, source code repository, corporate wiki, inventory system, or simply a collection of bookmarks everyone in the company uses.
+  dd
+    | Jarvis lets you create custom commands for your browser's search box, and
+    | share those commands with friends and coworkers.  Whether it's a customer
+    | database, issue tracking system, source code repository, company wiki,
+    | inventory system, or simply a shared collection of bookmarks , Jarvis
+    | makes helps you get there.
 
   dt How's it work?
-  dd It's so darn simple it's almost embarassing.  Just 
+  dd
+    | It's so darn simple it's almost embarassing.  Just 
     a(href='#',onclick='addJarvis()') add Jarvis to your search box
-    |  and search for "jarvis" to get started. (PENDING: that link only works on IE and FF for the moment.  Safari/Chrome support coming soon.)
+    |  and search for "jarvis" to get started. (PENDING: that link only works
+    | on IE and FF for the moment.  Safari/Chrome support coming soon.)
 
   dt "Wait... you're not one of those spammy toolbar things are you?"
-  dd Nope.  Jarvis is 100% kosher.  No spam, no malware/adware, nothing to install &hellip; none of that nonsense.  Heck, it's opensource - you can hack on the code if you want!
+  dd
+    | Nope.  Jarvis is 100% kosher.  No spam, no malware/adware, nothing to
+    | install &hellip; none of that nonsense.  In fact, it's opensource so 
+    a(href='https://github.com/broofa/jarvis') check it out
+    |  and help us improve it.
 
 h2 Commands
 
-p Jarvis ships with the following commands
-
-ul#modules
-  li(style='color: #666; font-size: 85%') &nbsp;&nbsp;&darr; default command (*)
-  each v,k in commands
-    li
-      label
-        input(type='radio', name='command', checked=true, onclick='setDefault(\'' + v.phrase + '\')')
-        | !{v.doc}
-      button() set as default
-
-  p (*) The default command is used anytime your search isn't recognized by Jarvis.  It's generally a good idea to have set this to a search engine, like "go" for google.
+each group, k in command.groups
+  h3 #{k} commands
+  
+  ul.module
+    each cmd in group.commands
+      li
+        label
+          input(type='radio',
+          name='command',
+          checked=defaultCommand = cmd.phrase,
+          onclick='setDefault(\'' + cmd.phrase + '\')')
+          | !{cmd.doc}

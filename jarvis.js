@@ -4,8 +4,8 @@
 
 var express = require('express');
 
-var command = require('./command'),
-    search = require('./search');
+var command = require('./lib/command'),
+    search = require('./lib/search');
 
 var app = module.exports = express.createServer();
 
@@ -42,16 +42,22 @@ app.configure('production', function() {
 
 app.get('/', function(req, res) {
   res.render('index', {
+    title: 'Jarvis',
     user: req.user,
-    commands: command.list,
-    search: search,
+    command: command,
+    defaultCommand: req.cookies.d
+  });
+});
+
+app.get('/error', function(req, res) {
+  res.render('error', {
     title: 'Jarvis'
   });
 });
 
 app.get('/search', function(req, res) {
-  var url = command.process(req) || '/error';
-  res.redirect(url || '/');
+  var url = command.process(req);
+  res.redirect(url || '/error');
 });
 
 app.listen(3000);

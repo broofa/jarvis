@@ -1,3 +1,9 @@
+commands.info = {
+  name: 'Search',
+  doc: 'Popular search sites.',
+  author: 'Jarvis'
+};
+
 var search = {
   // TODO: This data structure should be modeled (or read directly from?) the
   // OpenSearch schema
@@ -41,4 +47,16 @@ var search = {
   }
 }
 
-module.exports = search;
+// Add search engine options
+Object.keys(search.ENGINES).sort().forEach(function(k) {
+  var engine = search.ENGINES[k];
+  var phrase = k.substr(0,2).toLowerCase();
+  commands.add({
+    doc: 'Search ' + engine.name + ' (e.g. "' + phrase + ' camera")',
+    phrase: phrase,
+    action: function(query) {
+      query = query.replace(this.match, '');
+      return search.getQueryURL(k, query);
+    }
+  });
+});

@@ -2,10 +2,9 @@
  * Module dependencies.
  */
 
-var express = require('express');
-
-var command = require('./command'),
-    search = require('./search');
+var express = require('express'),
+    path = require('path'),
+    command = require('./lib/command')
 
 var app = module.exports = express.createServer();
 
@@ -42,17 +41,34 @@ app.configure('production', function() {
 
 app.get('/', function(req, res) {
   res.render('index', {
+    title: 'Jarvis',
     user: req.user,
-    commands: command.list,
-    search: search,
-    title: 'Jarvis'
+    command: command,
+    defaultCommand: req.cookies.d
   });
 });
 
-app.get('/search', function(req, res) {
-  var url = command.process(req) || '/error';
-  res.redirect(url || '/');
+app.get('/reload', function(req, res) {
+  // Force a reload of the plugins
+  command.commandSets = [];
+  command.loadPlugins(path.join(__dirname, 'plugins'));
+
+  res.redirect('/');
 });
+
+app.get('/search', function(req, res) {
+  var url = command.process(req);
+  if (!url) {
+    res.render('error', {
+      title: 'Jarvis',
+      message: 'Hmm... that command doesn\'t go anywhere'
+    });
+  } else {
+    res.redirect(url);
+  }
+});
+
+command.loadPlugins(path.join(__dirname, 'plugins'));
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

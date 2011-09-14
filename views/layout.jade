@@ -5,10 +5,62 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='http://fonts.googleapis.com/css?family=Forum|Merienda+One', rel='stylesheet', type='text/css')
     link(rel='search', href='http://localhost:3000/jarvis.xml', type='application/opensearchdescription+xml', title='Jarvis')
+    style
+      body {
+      }
+
+      #content {
+        padding: 20px 40px;
+        background-color: #fff;
+        border: solid 2px #999;
+        box-shadow: 10px 10px 5px rgba(0,0,0,.25);
+        max-width: 700px;
+        margin: 20px auto;
+        border-radius: 40px;
+      }
+
+      #getit {
+        position:absolute; top: -20px; right: -40px;
+        width: 160px;
+        height: 120px;
+        overflow:hidden;
+      }
+
+      #getit a {
+        color: #fff;
+        background-color: #803;
+
+        position:absolute; top: 0px; right: 0px;
+        width: 300px;
+        display: block;
+        text-align: center;
+        padding: 3px 0px;
+        border: solid 2px #666;
+        font: 11.5pt "Merienda One", cursive;
+        text-decoration: none;
+
+        box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+
+        -moz-transform: translate(90px,30px) rotate(35deg);
+        -webkit-transform: translate(90px,30px) rotate(35deg);
+        -o-transform: translate(90px,30px) rotate(35deg);
+        -ms-transform: translate(90px,30px) rotate(35deg);
+        transform: translate(90px,30px) rotate(35deg);
+      }
+      #getit a:hover {
+        background-color: #a00;
+      }
+
 
   body
-    div#top
-      img(src='/images/jarvis.png')
-      h2 The Search Box Assistant
+    div#content
+      div#top
+        img(src='/images/jarvis.png')
+        h2 The Search Box Assistant
 
-    div!= body
+        //- "Get the Source"
+        div#getit
+          a(href='https://github.com/broofa/jarvis') Get The Source
+
+
+      div!= body

@@ -1,10 +1,14 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.4.6"
-    , "less": ">= 0.0.1"
-    , "jade": ">= 0.0.1"
-  }
+  "name": "jarvis",
+  "dependencies": {
+    "jsdom": ">= *",
+    "xml2js": ">= *",
+    "jade": ">= *",
+    "underscore": ">= *",
+    "request": "*",
+    "express": "2.4.6",
+    "less": ">= *"
+  },
+  "private": true,
+  "version": "0.0.1"
 }

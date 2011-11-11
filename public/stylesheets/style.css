@@ -8,11 +8,12 @@ body {
   text-align: center;
 }
 #top h2 {
+  position: relative;
   font: 11.5pt "Merienda One", cursive;
 }
 a {
-  color: #803;
+  color: #660;
 }
 a:hover {
-  color: #a00;
+  color: #883;
 }

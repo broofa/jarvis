@@ -1,10 +1,10 @@
 !!!
 html
   head
-    title= title
+    title Jarvis
+    link(rel='search', href='http://localhost:3000/jarvis.xml', type='application/opensearchdescription+xml', title='Jarvis')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='http://fonts.googleapis.com/css?family=Forum|Merienda+One', rel='stylesheet', type='text/css')
-    link(rel='search', href='http://localhost:3000/jarvis.xml', type='application/opensearchdescription+xml', title='Jarvis')
     style
       body {
       }
@@ -20,7 +20,9 @@ html
       }
 
       #getit {
-        position:absolute; top: -20px; right: -40px;
+        position:absolute;
+        top: -23px;
+        right: -43px;
         width: 160px;
         height: 120px;
         overflow:hidden;
@@ -28,7 +30,7 @@ html
 
       #getit a {
         color: #fff;
-        background-color: #803;
+        background-color: #880;
 
         position:absolute; top: 0px; right: 0px;
         width: 300px;
@@ -39,8 +41,6 @@ html
         font: 11.5pt "Merienda One", cursive;
         text-decoration: none;
 
-        box-shadow: 2px 2px 2px rgba(0,0,0,.25);
-
         -moz-transform: translate(90px,30px) rotate(35deg);
         -webkit-transform: translate(90px,30px) rotate(35deg);
         -o-transform: translate(90px,30px) rotate(35deg);
@@ -48,7 +48,7 @@ html
         transform: translate(90px,30px) rotate(35deg);
       }
       #getit a:hover {
-        background-color: #a00;
+        background-color: #aa3;
       }
 
 

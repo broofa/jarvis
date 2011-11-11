@@ -5,19 +5,19 @@ commands.info = {
 };
 
 commands.add({
-  doc: 'github.com',
   phrase: 'gh',
+  doc: 'github.com',
   action: 'http://github.com'
 });
 
 commands.add({
-  doc: 'stackoverflow.com',
   phrase: 'so',
+  doc: 'stackoverflow.com',
   action: 'http://stackoverflow.com'
 });
 
 commands.add({
+  phrase: 'gitref',
   doc: 'gitref.com',
-  phrase: ['gitref'],
   action: 'http://gitref.com'
 });

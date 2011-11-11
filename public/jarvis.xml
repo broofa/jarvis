@@ -4,8 +4,11 @@
   <ShortName>Jarvis</ShortName>
   <Description>Jarvis. The Search Box Assistant.</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">http://localhost:3000/images/icon.ico</Image>
+  <Image width="16" height="16" type="image/x-icon">http://localhost:3000/favicon.ico</Image>
   <Url type="text/html" method="GET" template="http://localhost:3000/search">
+    <Param name="q" value="{searchTerms}"/>
+  </Url>
+  <Url type="application/x-suggestions+json" method="GET" template="http://localhost:3000/suggest/">
     <Param name="q" value="{searchTerms}"/>
   </Url>
   <SearchForm>http://localhost:3000/search</SearchForm>

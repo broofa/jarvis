@@ -2,6 +2,13 @@
   having them inline here is easier during early development
 
 style
+  h3 {
+    font-size: 120%;
+    padding: 0px;
+    padding: 5px 0px;
+    margin: 5px 0px;
+  }
+
   fieldset {
     margin-top: 10px;
     border: solid 1px #ccc;
@@ -20,16 +27,40 @@ style
     margin-bottom: 1em;
   }
 
-  .module li {
-    list-style-type: none;
+  .section.closed .fold {
+    display: none;
   }
 
-  .module b {
+  .switch {
+    text-align: center;
+    border-radius: 15px;
+
+    margin-left: 6px;
     display: inline-block;
-    min-width: 60px;
-    font-family: monospace;
+    position: relative;
+    color: #883;
+    margin-right: 20px;
+    -webkit-transition: all 0.3s ease-in;
+  }
+  .section h3 {
+    -webkit-transition: all 0.1s linear;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .section h3:hover {
+    cursor: pointer;
+    background-color: #cc8;
+  }
+  .section.closed .switch {
+    -webkit-transform: rotate(-90deg);
   }
 
+  .section td.phrase {
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+script(src='/javascripts/jquery.min.js')
 script
   function addJarvis() {
     external.AddSearchProvider('http://localhost:3000/jarvis.xml');
@@ -42,6 +73,10 @@ script
       'max-age=' + 1e8
     ].join(';')
   }
+
+  $('.section h3').live('click', function() {
+    $(this).closest('.section').toggleClass('closed');
+  });
 
 dl
   dt What is it?
@@ -64,21 +99,30 @@ dl
     | Nope.  Jarvis is 100% kosher.  No spam, no malware/adware, nothing to
     | install &hellip; none of that nonsense.  In fact, it's opensource so 
     a(href='https://github.com/broofa/jarvis') check it out
-    |  and help us improve it.
+    |  and help improve it.
+
+//
+  h2 Try It
+  form(action="/search", method="get")
+    label
+      input(type="text",name="q")
+      | e.g. "go nikon camera"
 
 h2 Commands
 
 each set in command.commandSets
-  p
-    b #{set.info.name}
-    |  &mdash; #{set.info.doc}
-  
-  ul.module
-    each cmd in set.commands
-      li
-        label
-          input(type='radio',
-          name = 'command',
-          checked = defaultCommand == cmd.phrase,
-          onclick = 'setDefault(\'' + cmd.phrase + '\')')
-          | !{cmd.doc}
+  div.section.closed
+    h3
+      span.switch &#9660;
+      | #{set.info.name} &mdash; #{set.info.doc}
+    div.fold
+      table
+        each cmd in set.commands
+          tr
+            td
+              input(type='radio',
+              name = 'command',
+              checked = defaultCommand == cmd.phrase,
+              onclick = 'setDefault(\'' + cmd.phrase + '\')')
+            td.phrase= cmd.phrase
+            td.doc !{cmd.doc}

@@ -7,11 +7,14 @@ commands.info = {
 commands.add({
   doc: 'Go to Jarvis home page',
   phrase: ['jarvis', 'J'],
-  action: '/'
-});
-
-commands.add({
-  doc: 'Reload jarvis plugins',
-  phrase: ['Jreload'],
-  action: '/reload'
+  action: '/',
+  suggest: function() {
+    // Return all command phrases as suggestions
+    var suggestions = [];
+    command.eachCommand(function(cmd) {
+      suggestions.push(cmd.phrase);
+    });
+console.log(suggestions);
+    return suggestions.sort();
+  }
 });

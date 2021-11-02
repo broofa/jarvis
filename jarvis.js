@@ -62,8 +62,9 @@ app.get('/search', function(req, res) {
   // Find any matching command (falling back to whatever the user has selected
   // for their default command)
   var phrase = req.query.q;
-  var cmd = command.matchPhrase(phrase, req.cookies.d || 'go');
 debugger;
+  var cmd = command.matchPhrase(phrase, req.cookies.d || 'go');
+
   // No command? This should never happen since it means we failed to do
   // anything useful for the user
   if (!cmd) {
@@ -93,7 +94,6 @@ app.get('/suggest', function(req, res) {
   // command objects just need to return a list of suggested words.  We handle
   // bundling it on proper OpenSearch format
   var results = cmd && cmd.suggest && cmd.suggest(phrase);
-
   if (!results) {
     res.writeHead(204);
     res.end;

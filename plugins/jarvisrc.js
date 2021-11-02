@@ -103,7 +103,7 @@ files.forEach(function(file) {
 });
 
 
-// Flag for detection circular resolution loops
+// Flag for detecting circular resolution loops
 var RESOLVING = {};
 
 /**
@@ -152,7 +152,7 @@ function makeAction(options) {
     replace(/{ARGS}/g, query);
 
     return url;
-  }
+  };
 }
 
 sections.forEach(function(section) {

@@ -14,7 +14,7 @@ commands.add({
     command.eachCommand(function(cmd) {
       suggestions.push(cmd.phrase);
     });
-console.log(suggestions);
+
     return suggestions.sort();
   }
 });

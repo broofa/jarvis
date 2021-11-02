@@ -2,7 +2,7 @@
 <!-- See https://developer.mozilla.org/en/creating_opensearch_plugins_for_firefox -->
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">  
   <ShortName>Jarvis</ShortName>
-  <Description>Jarvis. The Search Box Assistant.</Description>
+  <Description>Jarvis. The Social Search Box.</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="16" height="16" type="image/x-icon">http://localhost:3000/favicon.ico</Image>
   <Url type="text/html" method="GET" template="http://localhost:3000/search">
